@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Driven Smart Farming System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .slider-container {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin: 20px 0;
+        }
+
+        .slider-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="range"] {
+            width: 250px;
+            margin: 10px 0;
+            background: #ddd;
+            border-radius: 5px;
+            height: 8px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background: #4CAF50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            background: #4CAF50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        #recommendations {
+            margin-top: 20px;
+            width: 80%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://st.adda247.com/https://wpassets.adda247.com/wp-content/uploads/multisite/sites/5/2023/02/25173600/Pradhan-Mantri-Kisan-Samman-Nidhi-Yojana-completes-4-years.png" width="600" alt="Pradhan Mantri Kisan Samman Nidhi Yojana">
+    <h1>AI-Driven Smart Farming System</h1>
+    <div class="slider-container">
+        <div class="slider-item">
+            <label for="temperature">Temperature</label>
+            <input type="range" id="temperature" min="0" max="50" value="25" aria-label="Temperature">
+            <p id="temperature-value">25°C</p>
+        </div>
+        <div class="slider-item">
+            <label for="humidity">Humidity</label>
+            <input type="range" id="humidity" min="0" max="100" value="60" aria-label="Humidity">
+            <p id="humidity-value">60%</p>
+        </div>
+        <div class="slider-item">
+            <label for="soil-moisture">Soil Moisture</label>
+            <input type="range" id="soil-moisture" min="0" max="100" value="40" aria-label="Soil Moisture">
+            <p id="soil-moisture-value">40%</p>
+        </div>
+        <div class="slider-item">
+            <label for="light-intensity">Light Intensity</label>
+            <input type="range" id="light-intensity" min="0" max="100" value="50" aria-label="Light Intensity">
+            <p id="light-intensity-value">50%</p>
+        </div>
+    </div>
+    <button onclick="getRecommendations()">Get Recommendations</button>
+    <div id="recommendations">Adjust sliders and click "Get Recommendations" to see suggestions.</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const temperatureSlider = document.getElementById('temperature');
+            const temperatureValue = document.getElementById('temperature-value');
+            const humiditySlider = document.getElementById('humidity');
+            const humidityValue = document.getElementById('humidity-value');
+            const soilMoistureSlider = document.getElementById('soil-moisture');
+            const soilMoistureValue = document.getElementById('soil-moisture-value');
+            const lightIntensitySlider = document.getElementById('light-intensity');
+            const lightIntensityValue = document.getElementById('light-intensity-value');
+
+            temperatureSlider.oninput = function() {
+                temperatureValue.textContent = this.value + '°C';
+            };
+            humiditySlider.oninput = function() {
+                humidityValue.textContent = this.value + '%';
+            };
+            soilMoistureSlider.oninput = function() {
+                soilMoistureValue.textContent = this.value + '%';
+            };
+            lightIntensitySlider.oninput = function() {
+                lightIntensityValue.textContent = this.value + '%';
+            };
+        });
+
+        function getRecommendations() {
+            const temperature = parseInt(document.getElementById('temperature').value);
+            const humidity = parseInt(document.getElementById('humidity').value);
+            const soilMoisture = parseInt(document.getElementById('soil-moisture').value);
+            const lightIntensity = parseInt(document.getElementById('light-intensity').value);
+
+            let recommendation = '';
+
+            // Simple rules for demonstration
+            if (temperature > 30 && humidity < 40) {
+                recommendation += 'Consider providing additional irrigation as the temperature is high and humidity is low.<br>';
+            }
+            if (soilMoisture < 20) {
+                recommendation += 'Soil moisture is too low. Increase watering.<br>';
+            }
+            if (lightIntensity > 70) {
+                recommendation += 'Light intensity is high. Ensure plants are not exposed to excessive sunlight.<br>';
+            }
+            if (humidity > 80) {
+                recommendation += 'Humidity is high. Ensure proper ventilation to prevent fungal diseases.<br>';
+            }
+            if (temperature < 10) {
+                recommendation += 'Temperature is low. Consider using heating systems for cold-sensitive crops.<br>';
+            }
+
+            if (recommendation === '') {
+                recommendation = 'Conditions are optimal for your crops.';
+            }
+
+            document.getElementById('recommendations').innerHTML = `<p>${recommendation}</p>`;
+        }
+    </script>
+</body>
+</html>
